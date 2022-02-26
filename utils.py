@@ -11,7 +11,6 @@ def import_data(path):
     data.index.names = ['Company']
     data.columns.names = ['Metrics', 'Year']
     data = data.unstack(level=1)
-    data = data.unstack(level='Company')
-    data = data.swaplevel()
+    data = data.unstack(level='Metrics')
     data = data.sort_index(level='Year')
     return data
