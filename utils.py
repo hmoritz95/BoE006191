@@ -20,4 +20,4 @@ def import_data(path):
     data_underwritings = data_underwritings.unstack(level=1)
     data_underwritings = data_underwritings.unstack(level='Metrics')
     data_underwritings = data_underwritings.sort_index(level='Year')
-    return data_general, data_underwritings
+    return data_general.replace(0, 0.01), data_underwritings.replace(0, 0.01)
