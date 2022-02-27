@@ -45,3 +45,5 @@ def clean_values(data, replacing_values):
             temp[i] = np.mean(data[i])
             data.loc[temp.index, temp.columns] = temp
         del temp
+
+    return data
