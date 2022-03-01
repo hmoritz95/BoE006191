@@ -32,17 +32,17 @@ def clean_values(data, replacing_values):
     :return: pd.DataFrame, returns the cleaned up data frame object
     """
     for i in replacing_values:
-        correction_term = replacing_values[i] #correction_term[2:]
-
-        if correction_term[1] == '<':
-            # choosing here the "biased" mean on purpose to keep at least the directions of the all-in values
+        correction_term = replacing_values[i]
+        # replacing first by NaN and then by mean to avoid that they are also included in the mean calculation
+        if correction_term[0] == '<':
             temp = data[data[i] <= float(correction_term[1:])]
-            temp[i] = np.mean(data[i])
+            data.loc[temp.index, i] = np.nan
+            temp[i] = np.nanmean(data[i])
             data.loc[temp.index, temp.columns] = temp
-        else:
-            # choosing here the "biased" mean on purpose to keep at least the directions of the all-in values
+        elif correction_term[0] == '>':
             temp = data[data[i] >= float(correction_term[1:])]
-            temp[i] = np.mean(data[i])
+            data.loc[temp.index, i] = np.nan
+            temp[i] = np.nanmean(data[i])
             data.loc[temp.index, temp.columns] = temp
         del temp
 
