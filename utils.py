@@ -6,7 +6,7 @@ def import_data(path):
     """
     This function is intended to read in the excel file and to clean it up
     :param path: string, the filepath
-    :return: pd.DataFrame, stacked with Year, Metric
+    :return: pd.DataFrames, both stacked with Year, Metric
     """
     data_general = pd.read_excel(path, index_col=0, header=[0, 1], sheet_name='Dataset 1 - General')
     data_general.index.names = ['Company']
